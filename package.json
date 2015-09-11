@@ -1,0 +1,23 @@
+{
+  "name": "gaston-blessify",
+  "version": "0.1.0",
+  "description": "blessify plugin for gaston",
+  "main": "index.js",
+  "scripts": {
+    "test": "gaston test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vigour-io/gaston-blessify.git"
+  },
+  "author": "andre.padez@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vigour-io/gaston-blessify/issues"
+  },
+  "homepage": "https://github.com/vigour-io/gaston-blessify#readme",
+  "dependencies": {
+    "less": "^2.5.1",
+    "through2": "^2.0.0"
+  }
+}
