@@ -13,6 +13,7 @@ var path = require('path')
 var Blessify = module.exports = function(options){
   this.options = options;
   this.lessCode = '';
+  this.originalCode = '';
   this.transform = transform(this);
 };
 
@@ -37,6 +38,9 @@ var transform = function(blessify){
       }
 
       var lessCode = str.replace(importRegExp, '') + '\n';
+      blessify.lessCode += '/* file: ' + file + ' */\n';
+      blessify.originalCode += '/* file: ' + file + ' */\n';
+      blessify.originalCode += str;
       blessify.lessCode += lessCode;
 
       this.push(output);
