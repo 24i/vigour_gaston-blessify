@@ -19,7 +19,12 @@ var Blessify = module.exports = function(options){
 
 Blessify.prototype.render = function(){
   return less.render(this.lessCode, this.options);
-}
+};
+
+Blessify.prototype.clear = function(){
+  this.lessCode = '';
+  this.originalCode = '';
+};
 
 var transform = function(blessify){
   return function(file, opts){
@@ -37,11 +42,11 @@ var transform = function(blessify){
         output += 'require(\'' + match[5] + '\');\n';
       }
 
-      var lessCode = str.replace(importRegExp, '') + '\n';
+      var lessCode = str.replace(importRegExp, '');
       blessify.lessCode += '/* file: ' + file + ' */\n';
       blessify.originalCode += '/* file: ' + file + ' */\n';
-      blessify.originalCode += str;
-      blessify.lessCode += lessCode;
+      blessify.originalCode += str + '\n';
+      blessify.lessCode += lessCode += '\n';
 
       this.push(output);
       return next();
