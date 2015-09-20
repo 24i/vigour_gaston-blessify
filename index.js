@@ -12,18 +12,26 @@ var path = require('path')
 
 var Blessify = module.exports = function(options){
   this.options = options;
+  this.files = {};
   this.lessCode = '';
   this.originalCode = '';
   this.transform = transform(this);
 };
 
 Blessify.prototype.render = function(){
-  return less.render(this.lessCode, this.options);
-};
-
-Blessify.prototype.clear = function(){
-  this.lessCode = '';
-  this.originalCode = '';
+  var self = this;
+  self.lessCode = '';
+  var files = Object.keys(self.files);
+  for(var i = 0, l = files.length; i < l; i++){
+    var file = files[i];
+    var str = self.files[file];
+    self.lessCode += '/* file: ' + file + ' */\n';
+    self.originalCode += '/* file: ' + file + ' */\n';
+    self.originalCode += str + '\n';
+    var lessCode = str.replace(importRegExp, '');
+    self.lessCode += lessCode += '\n';
+  }
+  return less.render(self.lessCode, self.options);
 };
 
 var transform = function(blessify){
@@ -34,7 +42,7 @@ var transform = function(blessify){
       if( !~CSS_EXTENSIONS.indexOf(ext) ){
         return ( this.push(buf) && next() );
       }
-
+      
       var str = buf.toString('utf8');
 
       var output = '';
@@ -42,11 +50,7 @@ var transform = function(blessify){
         output += 'require(\'' + match[5] + '\');\n';
       }
 
-      var lessCode = str.replace(importRegExp, '');
-      blessify.lessCode += '/* file: ' + file + ' */\n';
-      blessify.originalCode += '/* file: ' + file + ' */\n';
-      blessify.originalCode += str + '\n';
-      blessify.lessCode += lessCode += '\n';
+      blessify.files[file] = str;
 
       this.push(output);
       return next();
