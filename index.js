@@ -22,7 +22,7 @@ Blessify.prototype.render = function(){
   var self = this;
   self.lessCode = '';
   var files = Object.keys(self.files);
-  for(var i = 0, l = files.length; i < l; i++){
+  for(var i = files.length - 1; i >= 0; i--){
     var file = files[i];
     var str = self.files[file];
     self.lessCode += '/* file: ' + file + ' */\n';
