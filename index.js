@@ -9,7 +9,7 @@ var Blessify = module.exports = function (app) {
   this.app = app || {}
   this.app.project = app.project || {}
   this.app.project.gaston = app.project.gaston || {}
-  this.options = app.project.gaston['less-options']
+  this.options = app.gaston['less-options']
   this.files = {}
   this.lessCode = ''
   this.originalCode = ''
