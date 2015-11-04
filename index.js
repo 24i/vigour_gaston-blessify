@@ -4,7 +4,7 @@ var through = require('through2')
 var CSS_EXTENSIONS = ['.css', '.less']
 var importRegExp = /^(\s+)?(?!\s*\/\/\s*)@import(\ +)?url(\ +)?\((\ +)?['"](.+)?['"](\ +)?\)\;?/gm
 var tildeRegExp = new RegExp('^\~')
-console.log('blessify linked')
+
 var Blessify = module.exports = function (app) {
   this.app = app || {}
   this.app.project = app.project || {}
