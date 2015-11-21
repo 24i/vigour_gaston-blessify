@@ -1,6 +1,6 @@
 {
   "name": "gaston-blessify",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "blessify plugin for gaston",
   "main": "index.js",
   "scripts": {
